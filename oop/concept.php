@@ -13,7 +13,13 @@ declare(strict_types=1);
 - Encapsulation
 - Inheritence
 - Polymorphism
+  -- method overloading (cannot achieve this directly.)
+  -- method overriding
 - Abstraction
+
+
+- Abstraction is not same as Abstract class or Abstract method
+
 */
 
 try {
@@ -146,3 +152,5 @@ try {
 } catch (\Throwable $exception) {
     var_dump($exception->getMessage());
 }
+
+
