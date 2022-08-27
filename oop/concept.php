@@ -48,7 +48,7 @@ try {
             throw new \Exception("Cannot set property '$name' to '$value', property does not exist\n"); 
         }
 
-        public function __get($name) { 
+        public function __get($name) {
             throw new \Exception("Cannot get value for property '$name', property does not exist\n"); 
         }
 
