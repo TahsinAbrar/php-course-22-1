@@ -11,6 +11,7 @@ try {
      * pdo = PHP Data Object
      * */
     $dsn = "mysql:host={$host};dbname={$dbName};charset=utf8mb4";
+    // $pdo = new PDO($dsn, $user, $password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING]);
     $pdo = new PDO($dsn, $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     // $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
