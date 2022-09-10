@@ -4,6 +4,7 @@ namespace MyBlog\Controllers;
 
 use PDO;
 use MyBlog\Helpers\Database;
+use MyBlog\Helpers\ResponseHelper;
 use MyBlog\Helpers\UtilHelper;
 
 class ArticlesController
@@ -17,16 +18,30 @@ class ArticlesController
 
     public function index()
     {
+        // var_dump('hello');exit;
         // get all articles
         try {
+            $limit = $_GET['limit'] ?? 50;
+            $offset = $_GET['offset'] ?? 0;
             // layer-1
             // query data according to business logic
-
-            $query = 'SELECT * FROM posts ORDER BY id DESC';
+            $query = "SELECT * FROM posts ORDER BY id DESC LIMIT $limit OFFSET $offset";
             $statement = $this->pdo->prepare($query);
             $statement->execute();
 
-            return $statement->fetchAll(PDO::FETCH_ASSOC);
+            $articles = $statement->fetchAll(PDO::FETCH_ASSOC);
+            // $data = [];
+            // $data['articles'] = $statement->fetchAll(PDO::FETCH_ASSOC);
+            // $data['sectionTitle'] = 'Blog';
+            // $data['action'] = 'index';
+
+            return [
+                'status' => 200,
+                'message' => 'Successfully rendered articles list',
+                'data' => $articles
+            ];
+            // return ResponseHelper::renderView('posts' . DIRECTORY_SEPARATOR . 'index', $data);
+
         } catch (\Throwable $exception) {
             // write error to log
             die('Couldn\'t query to DB');
@@ -36,10 +51,18 @@ class ArticlesController
     public function create()
     {
         // show create page of article
+        return 'create article page';
+        // $data = [
+        //     'sectionTitle' => 'Create new Blog',
+        //     'action' => 'create'
+        // ];
+
+        // return ResponseHelper::renderView('posts/create', $data);
     }
 
     public function store($request)
     {
+        var_dump($request);exit;
         try {
             // store article data into database
             $title = $request['title'] ?? null;
