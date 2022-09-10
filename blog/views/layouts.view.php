@@ -11,9 +11,9 @@
             </div>
             <div class="col-6 text-end">
                 <?php if ($action === 'index'): ?>
-                    <a class="btn btn-outline-primary" href="create.php">Add Post</a>
+                    <a class="btn btn-outline-primary" href="/posts/create">Add Post</a>
                 <?php else: ?>
-                    <a class="btn btn-outline-primary" href="index.php">Back to All Posts</a>
+                    <a class="btn btn-outline-primary" href="/posts">Back to All Posts</a>
                 <?php endif; ?>
             </div>
         </div>

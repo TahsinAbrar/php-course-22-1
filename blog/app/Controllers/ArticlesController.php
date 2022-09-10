@@ -18,7 +18,6 @@ class ArticlesController
 
     public function index()
     {
-        // var_dump('hello');exit;
         // get all articles
         try {
             $limit = $_GET['limit'] ?? 50;
@@ -29,19 +28,12 @@ class ArticlesController
             $statement = $this->pdo->prepare($query);
             $statement->execute();
 
-            $articles = $statement->fetchAll(PDO::FETCH_ASSOC);
-            // $data = [];
-            // $data['articles'] = $statement->fetchAll(PDO::FETCH_ASSOC);
-            // $data['sectionTitle'] = 'Blog';
-            // $data['action'] = 'index';
+            $data = [];
+            $data['articles'] = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $data['sectionTitle'] = 'Blog';
+            $data['action'] = 'index';
 
-            return [
-                'status' => 200,
-                'message' => 'Successfully rendered articles list',
-                'data' => $articles
-            ];
-            // return ResponseHelper::renderView('posts' . DIRECTORY_SEPARATOR . 'index', $data);
-
+            return ResponseHelper::renderView('posts/index', $data);
         } catch (\Throwable $exception) {
             // write error to log
             die('Couldn\'t query to DB');
@@ -51,18 +43,19 @@ class ArticlesController
     public function create()
     {
         // show create page of article
-        return 'create article page';
-        // $data = [
-        //     'sectionTitle' => 'Create new Blog',
-        //     'action' => 'create'
-        // ];
+        $data = [
+            'pageTitle' =>'Blog | Create new Article',
+            'sectionTitle' => 'Create new Blog',
+            'action' => 'create'
+        ];
 
-        // return ResponseHelper::renderView('posts/create', $data);
+        return ResponseHelper::renderView('posts/create', $data);
     }
 
-    public function store($request)
+    public function store()
     {
-        var_dump($request);exit;
+        $request = $_POST;
+        // var_dump($request);exit;
         try {
             // store article data into database
             $title = $request['title'] ?? null;
@@ -108,7 +101,7 @@ class ArticlesController
                 }
 
                 $query = 'INSERT INTO posts (title,category,image_path,author_name,published_at)
-            VALUES (:title,:category,:image_path,:author_name,:published_at)';
+                                VALUES (:title,:category,:image_path,:author_name,:published_at)';
                 $statement = $this->pdo->prepare($query);
                 $statement->bindValue(':title', $title);
                 $statement->bindValue(':category', $category);
@@ -118,7 +111,7 @@ class ArticlesController
 
                 $statement->execute();
 
-                header('Location: index.php');
+                header('Location: /posts');
                 exit(0);
             }
 
@@ -126,7 +119,8 @@ class ArticlesController
 
             $_SESSION['errors'] = $errors;
             // var_dump($errors);exit;
-            header('Location: create.php');
+            header('Location: /posts/create');
+            exit;
         } catch (\Throwable $exception) {
             var_dump($exception->getMessage());
             exit;

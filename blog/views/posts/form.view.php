@@ -8,7 +8,7 @@ $author_name = $postData['author_name'] ?? '';
 
 ?>
 
-<form method="POST" enctype="multipart/form-data">
+<form method="POST" action="/posts" enctype="multipart/form-data">
     <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input name="title" type="text" class="form-control" id="title" value="<?php echo $title; ?>" placeholder="Enter Title">

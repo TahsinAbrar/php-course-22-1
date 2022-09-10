@@ -19,30 +19,6 @@ $dotenv->safeLoad();
 $dbConfig = include_once __DIR__ . '/../config/database.php';
 Database::loadConfig($dbConfig);
 
-// get database instance
-$pdo = Database::getInstance();
-
-// $pageTitle = 'Blog Site';
-// $heading = 'All Posts';
-
-
-// $articlesInstance = new ArticlesController();
-// $articles = $articlesInstance->index();
-
-
-// ob_start();
-
-// include_once __DIR__ . '/../views/posts/index.view.php';
-
-// $content = ob_get_clean();
-
-// $action = 'index';
-// $pageTitle = 'Blog | All Articles';
-// $sectionTitle = 'All Articles';
-
-// include_once __DIR__ . '/../views/layouts.view.php';
-
-
 // Create a service container
 $container = new Container;
 
@@ -72,8 +48,7 @@ $redirect = new Redirector(new UrlGenerator($router->getRoutes(), $request));
 $response = $router->dispatch($request);
 
 // var_dump($response);exit;
+
 // Send the response back to the browser
 
 $response->send();
-
-// Route::get('/posts'. [ArticlesController::class, 'index']);

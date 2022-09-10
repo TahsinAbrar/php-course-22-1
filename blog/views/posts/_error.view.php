@@ -1,4 +1,10 @@
-<?php include_once __DIR__ . '/_error.view.php'; ?>
+<?php
+session_start();
+$errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : [];
+
+unset($_SESSION['errors']);
+session_destroy();
+?>
 <?php if (!empty($errors)) : ?>
     <div class="alert alert-danger" role="alert">
         <ul>
@@ -10,9 +16,3 @@
         </ul>
     </div>
 <?php endif; ?>
-
-<div class="row mt-2 w-75 bg-light mx-auto">
-    <div class="col">
-        <?php include_once __DIR__ .'/form.view.php'; ?>
-    </div>
-</div>
