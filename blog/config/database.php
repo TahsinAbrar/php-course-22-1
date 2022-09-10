@@ -1,20 +1,9 @@
 <?php
 
-try {
-    $host = '127.0.0.1';
-    $user = 'root';
-    $password = '';
-    $dbName = 'db_blog';
-    
-    /*
-     * dsn = data source name
-     * pdo = PHP Data Object
-     * */
-    $dsn = "mysql:host={$host};dbname={$dbName};charset=utf8mb4";
-    // $pdo = new PDO($dsn, $user, $password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING]);
-    $pdo = new PDO($dsn, $user, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
-} catch (\Throwable $exception) {
-    die('Couldn\'t connect to DB');
-}
+return [
+    'db_host' => $_ENV['DB_HOST'] ?? '',
+    'db_port' => $_ENV['DB_PORT'] ?? '',
+    'db_user' => $_ENV['DB_USER'] ?? '',
+    'db_password' => $_ENV['DB_PASSWORD'] ?? '',
+    'db_name' => $_ENV['DB_NAME'] ?? '',
+];

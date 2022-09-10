@@ -1,36 +1,42 @@
 <?php
 
-namespace App\Helpers;
+namespace MyBlog\Helpers;
 
 use PDO;
 
 class Database
 {
-    protected static $instance;
     protected static $config;
+    protected static $instance;
 
     protected function __construct()
     {
         //
     }
 
-    // public static function loadConfig(array $config)
-    // {
-    //     self::$config = $config;
-    // }
+    public static function loadConfig(array $config)
+    {
+        self::$config = $config;
+    }
 
     public static function getInstance()
     {
         if (empty(self::$instance)) {
-            // if (empty(self::$config)) {
-            //     throw new \Exception('config is not loaded');
-            // }
+            if (empty(self::$config)) {
+                throw new \Exception('config is not loaded');
+            }
+
+            $host = self::$config['db_host'];
+            $port = self::$config['db_port'];
+            $user = self::$config['db_user'];
+            $password = self::$config['db_password'];
+            $dbName = self::$config['db_name'];
 
             try {
-                $host = '127.0.0.1';
-                $user = 'root';
-                $password = '';
-                $dbName = 'db_blog';
+                // $host = $_ENV['DB_HOST'] ?? '127.0.0.1';
+                // $user = $_ENV['DB_USER'] ?? 'root';
+                // $password = $_ENV['DB_PASSWORD'] ?? 'abcd';
+                // $dbName = $_ENV['DB_NAME'] ?? 'db_blog';
                 
                 /*
                  * dsn = data source name

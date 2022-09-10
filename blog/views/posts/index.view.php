@@ -15,11 +15,14 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($articles as $idx => $article) : ?>
+                <?php
+
+
+ foreach ($articles as $idx => $article) : ?>
                     <tr>
                         <th scope="row"><?php echo $idx + 1; ?></th>
                         <td>
-                            <img class="w-25" src="<?php echo !empty($article['image_path']) ? '/assets/' . $article['image_path'] : 'https://via.placeholder.com/120'; ?>" alt="post image">
+                            <img class="w-25" src="<?php echo !empty($article['image_path']) ? \MyBlog\Helpers\UtilHelper::asset_path($article['image_path']) : 'https://via.placeholder.com/120'; ?>" alt="post image">
                         </td>
                         <td><?php echo $article['title']; ?></td>
                         <td><?php echo $article['category']; ?></td>

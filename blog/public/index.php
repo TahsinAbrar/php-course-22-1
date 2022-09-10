@@ -1,11 +1,17 @@
 <?php
 
+require_once __DIR__ . '/../vendor/autoload.php';
 // require_once __DIR__ . '/../config/database.php';
-require_once __DIR__ . '/../app/Helpers/Database.php';
-require_once __DIR__ . '/../app/Controllers/ArticlesController.php';
 
-use App\Controllers\ArticlesController;
-use App\Helpers\Database;
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->safeLoad();
+
+
+use MyBlog\Controllers\ArticlesController;
+use MyBlog\Helpers\Database;
+
+$dbConfig = include_once __DIR__ . '/../config/database.php';
+Database::loadConfig($dbConfig);
 
 $pdo = Database::getInstance();
 

@@ -1,14 +1,31 @@
 <?php
 
+session_start();
+
+/*
+ * Req 1: If there is any validation error, show the validation error in the next page.
+ * Req 2: If the create.php page load again without having any error, do not show the same errors.
+ * Req 3: If all OK, then store the data into DB.
+*/
+
+
+
+require_once __DIR__ . '/../vendor/autoload.php';
 // database connection
-
-use App\Controllers\ArticlesController;
-
 require_once __DIR__ . './../config/database.php';
+
+use MyBlog\Controllers\ArticlesController;
+
 // require_once __DIR__ . './../app/Controllers/ArticlesController.php';
 
 $action = 'create';
-$errors = [];
+$errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : [];
+
+// var_dump($_SESSION);
+// var_dump($_SESSION);
+unset($_SESSION['errors']);
+session_destroy();
+
 
 // if POST data, then store the data
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -20,59 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     var_dump($_POST);
     echo "</pre>";
     die('Here, it will store data to database');
-
-    // $title = $_POST['title'] ?? null;
-    // $description = $_POST['description'] ?? null;
-    // $category = $_POST['category'] ?? null;
-    // $authorName = $_POST['author_name'] ?? null;
-    // $image = $_FILES['image'] ?? null;
-    // $imagePath = '';
-
-    // var_dump($_FILES);
-    // exit;
-
-    // validation
-    // if (!$title) {
-    //     $errors['title'] = 'Post title is required';
-    // }
-
-    // if (!$category) {
-    //     $errors['category'] = 'Post category is required';
-    // }
-
-    // if (!$authorName) {
-    //     $errors['author_name'] = 'Post author name is required';
-    // }
-
-    // if (empty($errors)) {
-    //     if ($image) {
-    //         if (!is_dir('images')) {
-    //             mkdir('images');
-    //         }
-
-    //         if (!is_dir('images/blogs')) {
-    //             mkdir('images/blogs');
-    //         }
-
-    //         // $imagePath = 'images/blogs/randomNumber_filename.jpg';
-    //         $imagePath = 'images/blogs/' . uniqid() . '_' . $image['name'];
-
-    //         move_uploaded_file($image['tmp_name'], $imagePath);
-    //     }
-
-    //     $query = 'INSERT INTO posts (title,category,image_path,author_name,published_at)
-    //     VALUES (:title,:category,:image_path,:author_name,:published_at)';
-    //     $statement = $pdo->prepare($query);
-    //     $statement->bindValue(':title', $title);
-    //     $statement->bindValue(':category', $category);
-    //     $statement->bindValue(':image_path', $imagePath);
-    //     $statement->bindValue(':author_name', $authorName);
-    //     $statement->bindValue(':published_at', date('Y-m-d H:i:s'));
-
-    //     $statement->execute();
-
-    //     header('Location: index.php');
-    // }
 }
 
 ?>
@@ -82,7 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php
 
 ob_start(); // built-in function
-
 
 include_once __DIR__ . '/../views/posts/create.view.php';
 
