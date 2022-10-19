@@ -9,7 +9,7 @@
         </div>
         <div class="row mt-2 w-75 bg-light mx-auto">
             <div class="col">
-                <form action="/articles" method="POST">
+                <form action="{{ url('/articles') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>

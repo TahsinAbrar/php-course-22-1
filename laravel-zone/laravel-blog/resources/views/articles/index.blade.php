@@ -178,5 +178,5 @@
 @endsection
 
 @section('pagination')
-{{--    @include('partials.pagination')--}}
+    @include('partials.pagination')
 @endsection

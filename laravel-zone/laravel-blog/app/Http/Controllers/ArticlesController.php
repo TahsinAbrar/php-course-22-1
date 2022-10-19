@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ArticlesController extends Controller
 {
@@ -14,6 +15,11 @@ class ArticlesController extends Controller
      */
     public function index(Request $request)
     {
+//        $userID = $request->input('user_id');
+//        app('log')->info('User hits on Article index page.');
+//
+//        Log::debug('User ID: ' . $userID); // log it only in local or dev server, not in production server
+
         // business logic
         $data = [
             'pageTitle' => 'Xplorer | Article List',
@@ -24,6 +30,15 @@ class ArticlesController extends Controller
 //        dd($data);
 
         return view('articles.index', $data);
+    }
+
+    public function manage()
+    {
+        $data = [
+            'articles' => Article::orderBy('id', 'desc')->paginate(10),
+        ];
+
+        return view('articles.manage', $data);
     }
 
     /**
@@ -59,9 +74,8 @@ class ArticlesController extends Controller
         $formRequest['author_name'] = '';
         Article::create($formRequest);
 
-        // INSERT INTO articles VALUES(.....);
+        return;
 
-        dd('created');
 
 
     }
@@ -85,7 +99,12 @@ class ArticlesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = [
+            'pageTitle' => 'Edit Article',
+            'article' => Article::findOrFail($id)
+        ];
+
+        return view('articles.edit', $data);
     }
 
     /**
@@ -97,8 +116,17 @@ class ArticlesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $formRequest = $request->only([
+            'title',
+            'description',
+            'category',
+            'author_name'
+        ]);
+
+        Article::where('id', $id)->update($formRequest);
+
+        return redirect()->route('manage.articles.index')->with('message', 'Articles updated successfully!');
+     }
 
     /**
      * Remove the specified resource from storage.
@@ -108,6 +136,9 @@ class ArticlesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Article::where('id', $id)->delete();
+
+        return redirect()->route('manage.articles.index')->with('message', 'Article has been deleted!');
+//        dd('it will destroy everything.. do not try this at home');
     }
 }
