@@ -41,6 +41,11 @@
               </div>
             </div>
             @endforeach
+
+              <div class="row">
+                  {{-- $articles->withQueryString()->links() --}}
+              </div>
+
           </div>
         </div>
       </div>
@@ -173,5 +178,5 @@
 @endsection
 
 @section('pagination')
-  {{ $articles->withQueryString()->links() }}
+{{--    @include('partials.pagination')--}}
 @endsection

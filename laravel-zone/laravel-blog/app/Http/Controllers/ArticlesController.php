@@ -12,13 +12,16 @@ class ArticlesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // business logic
         $data = [
             'pageTitle' => 'Xplorer | Article List',
-            'articles' => Article::paginate(3)
+//            'articles' => Article::simplePaginate(3)
+            'articles' => Article::latest()->paginate(3)
         ];
+
+//        dd($data);
 
         return view('articles.index', $data);
     }
@@ -30,7 +33,7 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        //
+        return view('articles.create');
     }
 
     /**
@@ -41,7 +44,26 @@ class ArticlesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        dd($request->all());
+        // _token
+//        'title',
+//            'description',
+//            'category'
+        // image
+        $formRequest = $request->only([
+            'title',
+            'description',
+            'category'
+        ]);
+
+        $formRequest['author_name'] = '';
+        Article::create($formRequest);
+
+        // INSERT INTO articles VALUES(.....);
+
+        dd('created');
+
+
     }
 
     /**

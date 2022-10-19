@@ -27,13 +27,12 @@ Route::get('/hello', function() {
 
 // Route::get('/blogs', [BlogController::class, 'index'])->name('blog.index');
 
-
 // RESTful routes
 Route::get('/blogs', [ArticlesController::class, 'index']);
 Route::get('/articles', [ArticlesController::class, 'index']);
 
-Route::get('/articles/create', [ArticlesController::class, 'create']);
-Route::post('/articles', [ArticlesController::class, 'store']);
+Route::get('/articles/create', [ArticlesController::class, 'create']); // view create page
+Route::post('/articles', [ArticlesController::class, 'store']); // store data
 
 Route::get('/articles/{id}', [ArticlesController::class, 'show']);
 Route::put('/articles/{id}', [ArticlesController::class, 'update']);
