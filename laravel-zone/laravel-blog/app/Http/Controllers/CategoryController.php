@@ -43,13 +43,13 @@ class CategoryController extends Controller
     {
         $validated = $request->validated();
 
-        $exists = Category::where('name', $validated['name'])->first();
-
-        if ($exists) {
-            return redirect()->back()->withErrors([
-                'name' => $validated['name'] .  " already exists in database!"
-            ]);
-        }
+//        $exists = Category::where('name', $validated['name'])->first();
+//
+//        if ($exists) {
+//            return redirect()->back()->withErrors([
+//                'name' => $validated['name'] .  " already exists in database!"
+//            ]);
+//        }
 
         Category::create($validated);
 
