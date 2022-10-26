@@ -30,8 +30,16 @@ Route::get('/hello', function() {
 // RESTful routes
 
 # Admin Panel
+
+Route::prefix('manage')->name('manage.')->group(function() {
+    Route::resource('categories', \App\Http\Controllers\CategoryController::class);
+});
+
+
+
+
 Route::get('/manage/articles', [ArticlesController::class, 'manage'])->name('manage.articles.index');
-Route::get('/articles/create', [ArticlesController::class, 'create'])->name('manage.articles.create'); // view create page
+Route::get('/manage/articles/create', [ArticlesController::class, 'create'])->name('manage.articles.create'); // view create page
 Route::post('/articles', [ArticlesController::class, 'store'])->name('manage.articles.store'); // store data
 Route::get('/manage/articles/{id}/edit', [ArticlesController::class, 'edit'])->name('manage.articles.edit');
 Route::put('/articles/{id}', [ArticlesController::class, 'update'])->name('manage.articles.update');

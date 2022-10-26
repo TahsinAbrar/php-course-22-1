@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreArticleRequest;
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -48,7 +50,10 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        return view('articles.create');
+        $data['pageName'] = 'Create blog';
+        $data['categories'] = Category::get(['id', 'name']);
+
+        return view('articles.create', $data);
     }
 
     /**
@@ -57,27 +62,11 @@ class ArticlesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreArticleRequest $request)
     {
-//        dd($request->all());
-        // _token
-//        'title',
-//            'description',
-//            'category'
-        // image
-        $formRequest = $request->only([
-            'title',
-            'description',
-            'category'
-        ]);
+        Article::create($request->validated());
 
-        $formRequest['author_name'] = '';
-        Article::create($formRequest);
-
-        return;
-
-
-
+        return redirect()->route('manage.articles.index');
     }
 
     /**

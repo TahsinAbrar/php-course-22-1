@@ -7,6 +7,9 @@
                 <h1>Add Post</h1>
             </div>
         </div>
+
+        @include('partials.validation_errors')
+
         <div class="row mt-2 w-75 bg-light mx-auto">
             <div class="col">
                 <form action="{{ url('/articles') }}" method="POST">
@@ -21,11 +24,15 @@
                     </div>
                     <div class="mb-3">
                         <select name="category" class="form-select" aria-label="Default select example">
-                            <option selected>Category</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            <option selected>--- Select Category ---</option>
+                            @foreach($categories as $key => $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
                         </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="author_name" class="form-label">Author Name</label>
+                        <input type="text" class="form-control" id="author_name" placeholder="Enter Author Name" name="author_name">
                     </div>
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Default file input example</label>

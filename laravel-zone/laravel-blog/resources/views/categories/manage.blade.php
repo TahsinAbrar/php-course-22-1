@@ -6,7 +6,7 @@
             <div class="row mb-2 justify-content-around ">
                 <div class="col-6"><h2>All Posts</h2></div>
                 <div class="col-6 text-end">
-                    <a class="btn btn-outline-primary" href="{{ route('manage.articles.create') }}">Add Post</a>
+                    <a class="btn btn-outline-primary" href="{{ route('manage.categories.create') }}">Add Category</a>
                 </div>
             </div>
             <div class="row">
@@ -18,28 +18,28 @@
                         <thead class="table-dark">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Category</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Slug</th>
                             <th scope="col">Date</th>
-                            <th scope="col">Author</th>
+                            <th scope="col">Active</th>
                             <th scope="col">Edit</th>
                             <th scope="col">Delete</th>
                         </tr>
                         </thead>
                         <tbody>
-                            @unless(empty($articles))
-                                @foreach($articles as $article)
+                            @unless(empty($categories))
+                                @foreach($categories as $category)
                                 <tr>
-                                    <th scope="row">{{ $article->id }}</th>
-                                    <td>{{ $article->title }}</td>
-                                    <td>{{ $article->category }}</td>
-                                    <td>{{ $article->created_at }}</td>
-                                    <td>{{ $article->author_name }}</td>
+                                    <th scope="row">{{ $category->id }}</th>
+                                    <td>{{ $category->name }}</td>
+                                    <td>{{ $category->slug }}</td>
+                                    <td>{{ $category->created_at }}</td>
+                                    <td>{{ $category->is_active }}</td>
                                     <td class="text-center text-success">
-                                        <a href="{{ route('manage.articles.edit', $article->id) }}"><i class="fas fa-edit"></i></a>
+                                        <a href="{{ route('manage.categories.edit', $category->id) }}"><i class="fas fa-edit"></i></a>
                                     </td>
                                     <td class="text-center text-danger">
-                                        <form action="{{ route('manage.articles.destroy', $article->id) }}" method="POST">
+                                        <form action="{{ route('manage.categories.destroy', $category->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-danger" type="submit"><i class="fa-solid fa-trash"></i></button>
@@ -61,5 +61,5 @@
 
 
 @section('pagination')
-    @include('partials.pagination')
+{{--    @include('partials.pagination')--}}
 @endsection
