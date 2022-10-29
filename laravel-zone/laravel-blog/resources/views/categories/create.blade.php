@@ -18,10 +18,10 @@
                         <label for="title" class="form-label">Name</label>
                         <input type="text" class="form-control" id="name" placeholder="Enter Name" name="name" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="title" class="form-label">Slug</label>
-                        <input type="text" class="form-control" id="slug" placeholder="Enter Slug" name="slug" required>
-                    </div>
+{{--                    <div class="mb-3">--}}
+{{--                        <label for="title" class="form-label">Slug</label>--}}
+{{--                        <input type="text" class="form-control" id="slug" placeholder="Enter Slug" name="slug" required>--}}
+{{--                    </div>--}}
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Default file input example</label>
                         <input name="image" class="form-control" type="file" id="formFile">

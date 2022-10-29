@@ -12,27 +12,27 @@
 
         <div class="row mt-2 w-75 bg-light mx-auto">
             <div class="col">
-                <form action="{{ url('/articles') }}" method="POST">
+                <form action="{{ route('manage.articles.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
-                        <input type="text" class="form-control" id="title" placeholder="Enter Title" name="title">
+                        <input type="text" class="form-control" id="title" placeholder="Enter Title" name="title" value="{{ old('title') }}">
                     </div>
                     <div class="form-floating mb-3">
-                        <textarea name="description" class="form-control" placeholder="Write Here" id="floatingTextarea2" style="height: 100px"></textarea>
+                        <textarea name="description" class="form-control" placeholder="Write Here" id="floatingTextarea2" style="height: 100px">{{ old('description') }}</textarea>
                         <label for="floatingTextarea2">Description</label>
                     </div>
                     <div class="mb-3">
-                        <select name="category" class="form-select" aria-label="Default select example">
-                            <option selected>--- Select Category ---</option>
+                        <select name="category_id" class="form-select" aria-label="Default select example">
+                            <option @if(!empty(old('category_id'))) selected @endif>--- Select Category ---</option>
                             @foreach($categories as $key => $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            <option @if(old('category_id')) selected @endif value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="author_name" class="form-label">Author Name</label>
-                        <input type="text" class="form-control" id="author_name" placeholder="Enter Author Name" name="author_name">
+                        <input type="text" class="form-control" id="author_name" placeholder="Enter Author Name" name="author_name"  value="{{ old('author_name') }}">
                     </div>
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Default file input example</label>

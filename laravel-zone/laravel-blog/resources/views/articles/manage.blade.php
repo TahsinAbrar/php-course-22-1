@@ -32,7 +32,7 @@
                                 <tr>
                                     <th scope="row">{{ $article->id }}</th>
                                     <td>{{ $article->title }}</td>
-                                    <td>{{ $article->category }}</td>
+                                    <td>{{ $article->category->name ?? 'N/A' }}</td>
                                     <td>{{ $article->created_at }}</td>
                                     <td>{{ $article->author_name }}</td>
                                     <td class="text-center text-success">

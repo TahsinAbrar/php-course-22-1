@@ -26,7 +26,7 @@ class ArticlesController extends Controller
         $data = [
             'pageTitle' => 'Xplorer | Article List',
 //            'articles' => Article::simplePaginate(3)
-            'articles' => Article::latest()->paginate(3)
+            'articles' => Article::with('category')->latest()->paginate(3)
         ];
 
 //        dd($data);
@@ -37,7 +37,7 @@ class ArticlesController extends Controller
     public function manage()
     {
         $data = [
-            'articles' => Article::orderBy('id', 'desc')->paginate(10),
+            'articles' => Article::with('category')->orderBy('id', 'desc')->paginate(10),
         ];
 
         return view('articles.manage', $data);
@@ -51,7 +51,9 @@ class ArticlesController extends Controller
     public function create()
     {
         $data['pageName'] = 'Create blog';
-        $data['categories'] = Category::get(['id', 'name']);
+        $data['categories'] = Category::select('id', 'name', 'is_active')
+            ->orderBy('name', 'asc')
+            ->get();
 
         return view('articles.create', $data);
     }

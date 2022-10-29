@@ -4,7 +4,7 @@
 @section('content')
     <div class="container table-container mt-5">
             <div class="row mb-2 justify-content-around ">
-                <div class="col-6"><h2>All Posts</h2></div>
+                <div class="col-6"><h2>All Categories</h2></div>
                 <div class="col-6 text-end">
                     <a class="btn btn-outline-primary" href="{{ route('manage.categories.create') }}">Add Category</a>
                 </div>

@@ -36,6 +36,9 @@ Route::prefix('manage')->name('manage.')->group(function() {
 });
 
 
+Route::get('dead-zone', function() {
+    dd(rand(1,5));
+});
 
 
 Route::get('/manage/articles', [ArticlesController::class, 'manage'])->name('manage.articles.index');

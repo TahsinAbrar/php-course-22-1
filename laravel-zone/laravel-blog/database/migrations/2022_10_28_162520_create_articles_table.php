@@ -18,7 +18,14 @@ return new class extends Migration
             $table->string('title', 255);
             $table->longText('description');
             $table->string('image', 255)->nullable();
-            $table->string('category', 100);
+//            $table->string('category', 100);
+            $table->integer('category_id')->unsigned()->nullable();
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories')
+//                ->cascadeOnDelete();
+                ->nullOnDelete();
+
             $table->string('author_name', 100);
             $table->string('tags')->nullable();
             $table->dateTime('published_at')->nullable();

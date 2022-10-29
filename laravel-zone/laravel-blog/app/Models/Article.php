@@ -14,7 +14,7 @@ class Article extends Model
     protected $fillable = [
         'title',
         'description',
-        'category',
+        'category_id',
         'author_name'
     ];
 
@@ -23,4 +23,9 @@ class Article extends Model
 //        'created_at',
 //        'updated_at',
 //    ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 }

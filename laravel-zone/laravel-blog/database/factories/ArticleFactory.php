@@ -20,7 +20,7 @@ class ArticleFactory extends Factory
             'title' => fake()->sentence(),
             'description' => fake()->paragraph(),
             'author_name' => fake()->name(),
-            'category' => fake()->name()
+            'category_id' => rand(1,5)
         ];
     }
 }

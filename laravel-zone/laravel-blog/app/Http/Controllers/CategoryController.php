@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -44,12 +45,14 @@ class CategoryController extends Controller
         $validated = $request->validated();
 
 //        $exists = Category::where('name', $validated['name'])->first();
-//
+
 //        if ($exists) {
 //            return redirect()->back()->withErrors([
 //                'name' => $validated['name'] .  " already exists in database!"
 //            ]);
 //        }
+
+//        $validated['slug'] = Str::slug($validated['name']);
 
         Category::create($validated);
 
