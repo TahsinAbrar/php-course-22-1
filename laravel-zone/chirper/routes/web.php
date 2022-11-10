@@ -21,4 +21,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::resource('chirps', \App\Http\Controllers\ChirpController::class)
+    ->only(['index', 'store', 'edit', 'update', 'destroy'])
+    ->middleware(['auth', 'verified']);
+
 require __DIR__.'/auth.php';
